@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Revision - Unit 3 (Fostering skills)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#ffffff; --ink:#1d2a4d; --soft:#56607a; --line:#d7deef;
+  --blue:#2f55d4; --onBlue:#ffffff; --mark:#fff1a8; --markInk:#1d2a4d;
+  --ok:#1f7a4d; --okBg:#e7f6ee; --bad:#b3261e; --badBg:#fdecea; --tint:#f3f6ff;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#141a2b; --ink:#e7ebf7; --soft:#a6aec4; --line:#2c3652;
+    --blue:#8aa6ff; --onBlue:#0e1424; --mark:#5b4f12; --markInk:#fff6c9;
+    --ok:#6fd3a0; --okBg:#123326; --bad:#ff8a80; --badBg:#3a1a1a; --tint:#1b2338;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#141a2b; --ink:#e7ebf7; --soft:#a6aec4; --line:#2c3652;
+  --blue:#8aa6ff; --onBlue:#0e1424; --mark:#5b4f12; --markInk:#fff6c9;
+  --ok:#6fd3a0; --okBg:#123326; --bad:#ff8a80; --badBg:#3a1a1a; --tint:#1b2338;
+  color-scheme: dark;
+}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Lexend","Segoe UI",Arial,sans-serif;font-weight:300;line-height:1.6;font-size:17px}
+main{max-width:820px;margin:0 auto;padding:2rem 1.25rem 5rem}
+h1{font-size:1.9rem;line-height:1.2;font-weight:700;margin:0 0 .4rem;color:var(--blue)}
+.sub{color:var(--soft);margin:0 0 1.5rem}
+h2{font-size:1.4rem;font-weight:700;margin:2.6rem 0 1rem;padding-bottom:.3rem;border-bottom:3px solid var(--blue)}
+h3{font-size:1.1rem;font-weight:600;margin:2.2rem 0 .6rem}
+.lvl{font-size:.85rem;color:var(--soft);font-weight:400;margin-left:.3rem}
+label.name{display:block;font-weight:600;margin-bottom:.3rem}
+input[type=text],select{font:inherit;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:6px;padding:.35rem .55rem}
+input[type=text]:focus,select:focus{outline:3px solid var(--blue);outline-offset:1px;border-color:var(--blue)}
+input:disabled,select:disabled{opacity:1;background:var(--tint)}
+#studentName{width:100%;max-width:420px}
+.namebox{border:2px solid var(--blue);border-radius:8px;padding:1rem;margin-bottom:1rem}
+.namebox p{margin:.4rem 0 0;font-size:.92rem;color:var(--soft)}
+ol.q{list-style:none;padding:0;margin:0;counter-reset:q}
+ol.q>li{counter-increment:q;position:relative;padding:.6rem .7rem .6rem 2.4rem;margin:0 0 .6rem;border-radius:8px;border:1.5px solid transparent}
+ol.q>li::before{content:counter(q) ".";position:absolute;left:.7rem;top:.6rem;font-weight:600}
+li.ok{border-color:var(--ok);background:var(--okBg)}
+li.bad{border-color:var(--bad);background:var(--badBg)}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.1rem 1rem;margin-top:.25rem}
+.opts label{cursor:pointer;display:flex;gap:.4rem;align-items:center}
+.opts input{accent-color:var(--blue);width:1.05rem;height:1.05rem}
+.blank{width:8.5em}
+.box{display:flex;flex-wrap:wrap;gap:.3rem .8rem;border:2px dashed var(--blue);padding:.7rem .9rem;margin:.4rem 0 1.2rem;border-radius:6px}
+.box span{font-weight:600}
+.fb{display:block;font-size:.92rem;margin-top:.35rem;font-weight:400}
+li.ok .fb{color:var(--ok)}
+li.bad .fb{color:var(--bad)}
+.fb:empty{display:none}
+/* Exercise 3: two columns */
+.match{display:grid;grid-template-columns:1fr 1fr;gap:0 1.2rem;align-items:start}
+.colhead{font-weight:600;margin:0 0 .5rem;padding-bottom:.25rem;border-bottom:1.5px solid var(--line)}
+.match .q select{margin-top:.3rem}
+ol.alpha{list-style:none;padding:0;margin:0}
+ol.alpha li{padding:.6rem .7rem .6rem 2.2rem;position:relative;margin-bottom:.6rem;background:var(--tint);border-radius:8px}
+ol.alpha li b{position:absolute;left:.75rem;top:.6rem}
+@media (max-width:520px){
+  body{font-size:15.5px}
+  .match{gap:0 .6rem}
+  ol.q>li{padding-left:2rem}
+  ol.alpha li{padding-left:1.8rem}
+}
+.orig{display:block;color:var(--soft)}
+.rw{display:flex;gap:.4rem;align-items:baseline;flex-wrap:wrap;margin-top:.3rem}
+.rw b{white-space:nowrap}
+.rw input{flex:1 1 220px;min-width:0}
+.actions{margin-top:2.5rem;display:flex;flex-direction:column;gap:.8rem;align-items:flex-start}
+button{font:inherit;font-weight:600;background:var(--blue);color:var(--onBlue);border:none;border-radius:8px;padding:.75rem 1.6rem;cursor:pointer;font-size:1.05rem}
+button:disabled{opacity:.5;cursor:default}
+button:focus-visible,summary:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.msg{font-weight:400;margin:0}
+.msg.warn{color:var(--bad)}
+#result{border:2px solid var(--blue);border-radius:10px;padding:1rem 1.2rem;margin-top:1.5rem}
+#result h3{margin-top:0}
+.scores{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:.5rem;margin:.6rem 0}
+.scores div{background:var(--tint);border-radius:8px;padding:.5rem .7rem}
+.scores b{display:block;font-size:1.3rem}
+.todo a{color:var(--blue);font-weight:600;margin-right:.5rem}
+.done{background:var(--okBg);color:var(--ok);border-radius:8px;padding:.8rem 1rem;font-weight:600}
+/* theory */
+#theory{margin:0 0 1rem}
+#theory summary{cursor:pointer;font-weight:700;padding:.85rem 0;color:var(--blue)}
+.rule{margin:1rem 0 1.4rem;padding-left:1rem;border-left:4px solid var(--blue)}
+.rule h4{margin:0 0 .3rem;font-size:1.02rem;font-weight:600}
+.formula{display:inline-block;background:var(--mark);color:var(--markInk);font-weight:600;padding:.1rem .5rem;margin:.15rem 0;border-radius:3px}
+.eg{margin:.3rem 0}
+.eg em{color:var(--soft)}
+.wrong{color:var(--bad);font-weight:400}
+.tablewrap{overflow-x:auto}
+table.vocab{width:100%;border-collapse:collapse;margin:.4rem 0 1rem}
+table.vocab th,table.vocab td{border-bottom:1px solid var(--line);padding:.4rem .5rem;text-align:left}
+table.vocab th{font-weight:600}
+iframe[name=gf-sink]{display:none}
+</style>
+</head>
+<body>
+<main>
+  <h1>Revision - Unit 3 (Fostering skills)</h1>
+  <p class="sub">Trình độ A2 · 4 bài, mỗi bài 10 câu (10 điểm) · Tổng 40 điểm</p>
+
+  <section id="theory">
+    <h2>Part I. Tóm tắt kiến thức</h2>
+    <div class="rule"><h4>1. Unless = If … not (Nếu … không / Trừ khi)</h4>
+      <span class="formula">Unless + S + V (khẳng định), S + will + V</span>
+      <p class="eg">I will not be happy unless you play games with me.<br><span class="wrong">✘ Unless I don’t play games…</span> → sau unless không dùng phủ định.</p></div>
+    <div class="rule"><h4>2. Although / Despite / In spite of (Mặc dù)</h4>
+      <span class="formula">Although + S + V, S + V</span><br>
+      <span class="formula">Despite / In spite of + V-ing, S + V</span> <em>(cùng chủ ngữ)</em><br>
+      <span class="formula">Despite / In spite of + Noun, S + V</span>
+      <p class="eg">Although he is rich, he doesn’t have a girlfriend.<br>Despite being rich, he doesn’t have a girlfriend.<br>Despite the bad weather, we went out.</p></div>
+    <div class="rule"><h4>3. Because / Because of (Bởi vì)</h4>
+      <span class="formula">Because + S + V</span> &nbsp; <span class="formula">Because of + V-ing / Noun</span>
+      <p class="eg">Because he was ill, he was absent today.<br>Because of being ill / his illness, he was absent today.</p></div>
+    <div class="rule"><h4>4. Not only … but also … (Không những … mà còn …)</h4>
+      <p class="eg">He is not only rich but also smart.</p></div>
+    <div class="rule"><h4>5. Either … or … (Hoặc … hoặc …)</h4>
+      <p class="eg">He can either do his homework or play games on Sunday.</p></div>
+    <div class="rule"><h4>6. Neither … nor … (Không … cũng không …)</h4>
+      <p class="eg">He can neither play games nor go out on Sunday. <em>(không thêm “not”)</em></p></div>
+    <div class="rule"><h4>7. Instead of + V-ing / Noun (Thay vì)</h4>
+      <p class="eg">Instead of playing games, he helped his mother.</p></div>
+  </section>
+
+  <h2>Part II. Bài tập</h2>
+  <div class="namebox">
+    <label class="name" for="studentName">Họ và tên (Full name)</label>
+    <input type="text" id="studentName" autocomplete="name" placeholder="Ví dụ: Nguyễn Văn An">
+    <p>Điểm của lần nộp đầu tiên sẽ được gửi cho giáo viên. Sau đó, em sửa lại các câu sai cho đến khi đúng hết.</p>
+  </div>
+
+
+  <h3>Exercise 1. Choose the correct answer A, B, C or D. <span class="lvl">(Dễ)</span></h3>
+  <ol class="q" id="ex1"></ol>
+
+  <h3>Exercise 2. Fill in each blank with a word/phrase from the box. <span class="lvl">(Trung bình)</span></h3>
+  <div class="box"><span>unless</span><span>although</span><span>despite</span><span>in spite of</span><span>because</span><span>because of</span><span>either</span><span>neither</span><span>not only</span><span>instead of</span></div>
+  <ol class="q" id="ex2"></ol>
+
+  <h3>Exercise 3. Match the first half (1–10) with the second half (a–j). <span class="lvl">(Trung bình – khá)</span></h3>
+  <div class="match">
+    <div>
+      <p class="colhead">Vế đầu (chọn chữ cái)</p>
+      <ol class="q" id="ex3"></ol>
+    </div>
+    <div>
+      <p class="colhead">Vế sau</p>
+      <ol class="alpha" id="ex3r"></ol>
+    </div>
+  </div>
+
+  <h3>Exercise 4. Rewrite the sentences, beginning with the given words. <span class="lvl">(Khó)</span></h3>
+  <ol class="q" id="ex4"></ol>
+
+  <div class="actions">
+    <button id="submitBtn" type="button">Nộp bài</button>
+    <p class="msg" id="msg" role="status" aria-live="polite"></p>
+  </div>
+
+  <section id="result" hidden aria-live="polite"></section>
+  <iframe name="gf-sink" title="Gửi điểm" tabindex="-1"></iframe>
+</main>
+
+<script>
+/* ===================== CÀI ĐẶT CHO GIÁO VIÊN =====================
+   Để điểm tự động gửi vào Google Form, dán "link điền sẵn" (pre-filled link) vào PREFILL_LINK.
+   Cách lấy (làm 1 lần):
+   1. Mở form ở chế độ chỉnh sửa → bấm dấu ⋮ (góc trên phải) → "Lấy đường liên kết điền sẵn" / "Get pre-filled link".
+   2. Điền ĐÚNG các giá trị sau:  Full name: NAME   Exercise 1: E1   Exercise 2: E2   Exercise 3: E3   Exercise 4: E4
+   3. Bấm "Lấy đường liên kết" → "Sao chép đường liên kết", rồi dán vào giữa hai dấu ngoặc kép bên dưới.
+   ================================================================== */
+const PREFILL_LINK = "";
+const FORM_ID = "1FAIpQLSd1hXnVEzQqdBQ8iEHbuwaOnb1dH8yWFFuf6rbTTTa5DeTmug";
+
+/* ===================== DỮ LIỆU BÀI TẬP ===================== */
+const EX1 = [
+  {q:"_______ it rains, we will go to the park.", o:["Unless","Because","Although","Despite"], a:0,
+   h:"Câu mang nghĩa: Nếu trời KHÔNG mưa, chúng ta sẽ đi công viên. Từ nào mang nghĩa “if … not”?"},
+  {q:"_______ the rain, they still played football.", o:["Although","Despite","Because","Unless"], a:1,
+   h:"Sau chỗ trống là danh từ (the rain) và hai vế trái ngược nhau. Chọn từ “mặc dù” đi được với danh từ."},
+  {q:"She is not only kind _______ funny.", o:["and","or","but also","nor"], a:2,
+   h:"Nhớ cấu trúc cặp: not only … ? Từ đi cặp với “not only” là gì?"},
+  {q:"You can either drink tea _______ coffee.", o:["or","nor","and","but"], a:0,
+   h:"“Either” luôn đi cặp với một từ cố định, nghĩa là “hoặc … hoặc …”."},
+  {q:"My grandfather neither smokes _______ drinks.", o:["or","nor","and","but also"], a:1,
+   h:"“Neither” đi cặp với một từ cố định, nghĩa là “không … cũng không …” (không phải “or”)."},
+  {q:"_______ he was tired, he went to bed early.", o:["Because","Despite","Because of","In spite of"], a:0,
+   h:"Sau chỗ trống là mệnh đề có S + V (he was tired). Vế sau là KẾT QUẢ của vế trước."},
+  {q:"We stayed at home because _______ the storm.", o:["of","in","for","on"], a:0,
+   h:"Muốn dùng “because” trước danh từ (the storm), ta phải thêm một giới từ."},
+  {q:"_______ watching TV, you should do your homework.", o:["Because of","Instead of","Despite","Unless"], a:1,
+   h:"Câu mang nghĩa: THAY VÌ xem TV, bạn nên làm bài tập."},
+  {q:"In spite _______ being poor, he is always happy.", o:["for","of","in","to"], a:1,
+   h:"“In spite” luôn đi với một giới từ cố định (giống “because ___ ”)."},
+  {q:"My father works very hard to _______ money and feed the family.", o:["earn","win","take","give"], a:0,
+   h:"Cụm từ “kiếm tiền” trong tiếng Anh là “___ money”."}
+];
+
+const EX2 = [
+  {b:"", t:"he studied hard, he failed the exam.", a:["although"],
+   h:"Hai vế trái ngược (học chăm nhưng vẫn trượt). Sau chỗ trống là mệnh đề S + V."},
+  {b:"You won’t pass the test", t:"you study harder.", a:["unless"],
+   h:"Nghĩa: Bạn sẽ không đỗ NẾU bạn KHÔNG học chăm hơn."},
+  {b:"", t:"his illness, he still went to work.", a:["despite","in spite of"],
+   h:"Sau chỗ trống là danh từ (his illness), hai vế trái ngược nhau."},
+  {b:"She was late for school", t:"the traffic jam.", a:["because of"],
+   h:"Sau chỗ trống là danh từ (the traffic jam), chỉ NGUYÊN NHÂN."},
+  {b:"I like", t:"cats nor dogs.", a:["neither"],
+   h:"Trong câu đã có “nor”. Từ nào đi cặp với “nor”?"},
+  {b:"We can", t:"go to the cinema or stay at home tonight.", a:["either"],
+   h:"Trong câu đã có “or”, nghĩa là chọn MỘT trong hai."},
+  {b:"Nam is", t:"a good student but also a good son.", a:["not only"],
+   h:"Trong câu đã có “but also”."},
+  {b:"She cried", t:"she lost her new phone.", a:["because"],
+   h:"Sau chỗ trống là mệnh đề S + V (she lost…), chỉ NGUYÊN NHÂN."},
+  {b:"", t:"playing games, Minh helped his mother with the housework.", a:["instead of"],
+   h:"Nghĩa: THAY VÌ chơi game, Minh giúp mẹ làm việc nhà."},
+  {b:"", t:"the cold weather, the children swam in the river.", a:["despite","in spite of"],
+   h:"Sau chỗ trống là danh từ (the cold weather), hai vế trái ngược nhau."}
+];
+
+const EX3_RIGHT = [
+  "but also a famous writer.",
+  "the football match was cancelled.",
+  "you should tell the truth.",
+  "you will miss the bus.",
+  "but the police said he was guilty.",
+  "he worked day and night to earn money.",
+  "she can cook very well.",
+  "or send me an email.",
+  "nor drinks beer.",
+  "he finished all his homework."
+];
+const EX3 = [
+  {q:"Unless you hurry,", a:"d", h:"Unless = if … not. Nếu em KHÔNG nhanh lên thì chuyện gì xảy ra?"},
+  {q:"Although she is only ten,", a:"g", h:"Although nối hai ý trái ngược: mới 10 tuổi NHƯNG cô ấy giỏi việc gì?"},
+  {q:"Despite feeling tired,", a:"j", h:"Mặc dù mệt, cậu ấy vẫn làm gì? Tìm vế có chủ ngữ “he”."},
+  {q:"Because of the heavy rain,", a:"b", h:"Mưa to gây ra KẾT QUẢ gì?"},
+  {q:"He is not only a doctor", a:"a", h:"“Not only” đi cặp với “but also”."},
+  {q:"You can either call me", a:"h", h:"“Either” đi cặp với “or”."},
+  {q:"My dad neither smokes", a:"i", h:"“Neither” đi cặp với “nor”."},
+  {q:"Instead of telling a lie,", a:"c", h:"Thay vì nói dối, em NÊN làm gì?"},
+  {q:"Because he wanted to feed his family,", a:"f", h:"Muốn nuôi gia đình thì người đó phải làm gì?"},
+  {q:"The man denied stealing the bike,", a:"e", h:"“Deny” = phủ nhận. Tìm vế bắt đầu bằng “but” nói điều ngược lại."}
+];
+
+const EX4 = [
+  {o:"If you don’t study, you will fail the exam.", s:"Unless",
+   a:["you study you will fail the exam"],
+   h:"Unless + mệnh đề KHẲNG ĐỊNH (bỏ “don’t”)."},
+  {o:"Although the weather was cold, we went out.", s:"Despite",
+   a:["the cold weather we went out","the cold we went out"],
+   h:"Despite + danh từ: đổi “the weather was cold” thành cụm danh từ (the + tính từ + danh từ)."},
+  {o:"Although she was tired, she kept working.", s:"In spite of",
+   a:["being tired she kept working","her tiredness she kept working"],
+   h:"In spite of + V-ing (cùng chủ ngữ “she”): was tired → being tired."},
+  {o:"He is handsome and kind.", s:"He is not only",
+   a:["handsome but also kind"],
+   h:"Cấu trúc: not only A but also B."},
+  {o:"Lan doesn’t like coffee. She doesn’t like tea either.", s:"Lan likes neither",
+   a:["coffee nor tea"],
+   h:"neither A nor B. Động từ “likes” đã có sẵn, không thêm “not”."},
+  {o:"Because it rained heavily, we stayed at home.", s:"Because of",
+   a:["the heavy rain we stayed at home","the heavy rain we stayed home","heavy rain we stayed at home"],
+   h:"Because of + danh từ: rained heavily → the heavy rain."},
+  {o:"Because he was ill, he didn’t go to school.", s:"Because of",
+   a:["being ill he did not go to school","his illness he did not go to school","his being ill he did not go to school"],
+   h:"Because of + V-ing (was ill → being ill) hoặc + danh từ (his illness)."},
+  {o:"You can go by bus, or you can go by taxi.", s:"You can either",
+   a:["go by bus or go by taxi","go by bus or by taxi","go by bus or taxi"],
+   h:"either A or B: hai vế sau “either” và “or” cùng dạng."},
+  {o:"He played games. He didn’t do his homework.", s:"He played games instead of",
+   a:["doing his homework","doing homework"],
+   h:"instead of + V-ing: did his homework → doing his homework."},
+  {o:"In spite of studying hard, Nam didn’t graduate.", s:"Although",
+   a:["nam studied hard he did not graduate","nam studied hard nam did not graduate","he studied hard nam did not graduate"],
+   h:"Although + S + V: studying hard → Nam studied hard."}
+];
+
+/* ===================== HIỂN THỊ ===================== */
+const $ = id => document.getElementById(id);
+const esc = s => s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const L = "abcdefghij";
+
+$("ex1").innerHTML = EX1.map((x,i)=>`
+  <li id="e1-${i}">${esc(x.q)}
+    <div class="opts" role="radiogroup">${x.o.map((o,j)=>`
+      <label><input type="radio" name="e1q${i}" value="${j}"> ${"ABCD"[j]}. ${esc(o)}</label>`).join("")}
+    </div><span class="fb"></span></li>`).join("");
+
+$("ex2").innerHTML = EX2.map((x,i)=>`
+  <li id="e2-${i}">${x.b?esc(x.b)+" ":""}<input type="text" class="blank" id="e2in${i}" aria-label="Câu ${i+1}" autocomplete="off" autocapitalize="off" spellcheck="false"> ${esc(x.t)}
+    <span class="fb"></span></li>`).join("");
+
+$("ex3").innerHTML = EX3.map((x,i)=>`
+  <li id="e3-${i}">${esc(x.q)}<br>
+    <select id="e3in${i}" aria-label="Câu ${i+1}">
+      <option value="">–</option>${L.split("").map(c=>`<option value="${c}">${c}</option>`).join("")}
+    </select><span class="fb"></span></li>`).join("");
+$("ex3r").innerHTML = EX3_RIGHT.map((t,i)=>`<li><b>${L[i]}.</b>${esc(t)}</li>`).join("");
+
+$("ex4").innerHTML = EX4.map((x,i)=>`
+  <li id="e4-${i}"><span class="orig">${esc(x.o)}</span>
+    <div class="rw"><b>→ ${esc(x.s)}</b><input type="text" id="e4in${i}" aria-label="Câu ${i+1}" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+    <span class="fb"></span></li>`).join("");
+
+/* ===================== CHẤM ĐIỂM ===================== */
+function norm(s){
+  return (" " + s.toLowerCase().replace(/[’‘`]/g,"'") + " ")
+    .replace(/\bdidn't\b/g,"did not").replace(/\bdon't\b/g,"do not").replace(/\bdoesn't\b/g,"does not")
+    .replace(/\bwon't\b/g,"will not").replace(/\bcan't\b/g,"can not").replace(/\bcannot\b/g,"can not")
+    .replace(/\bisn't\b/g,"is not").replace(/\bwasn't\b/g,"was not").replace(/(\w)'ll\b/g,"$1 will")
+    .replace(/[^a-z\s]/g," ").replace(/\s+/g," ").trim();
+}
+function stripStart(ans, start){
+  const n = norm(ans), s = norm(start);
+  return n.startsWith(s + " ") ? n.slice(s.length + 1) : n;
+}
+
+function getItems(){
+  const items = [];
+  EX1.forEach((x,i)=>{
+    const sel = document.querySelector(`input[name="e1q${i}"]:checked`);
+    items.push({ex:0,i,li:$("e1-"+i),
+      inputs:[...document.querySelectorAll(`input[name="e1q${i}"]`)],
+      empty:!sel, ok:!!sel && +sel.value===x.a, h:x.h});
+  });
+  EX2.forEach((x,i)=>{
+    const v = $("e2in"+i).value;
+    items.push({ex:1,i,li:$("e2-"+i),inputs:[$("e2in"+i)],empty:!v.trim(),ok:x.a.includes(norm(v)),h:x.h});
+  });
+  EX3.forEach((x,i)=>{
+    const v = $("e3in"+i).value;
+    items.push({ex:2,i,li:$("e3-"+i),inputs:[$("e3in"+i)],empty:!v,ok:v===x.a,h:x.h});
+  });
+  EX4.forEach((x,i)=>{
+    const v = $("e4in"+i).value;
+    items.push({ex:3,i,li:$("e4-"+i),inputs:[$("e4in"+i)],empty:!v.trim(),
+      ok:x.a.includes(stripStart(v,x.s)),h:x.h});
+  });
+  return items;
+}
+
+/* ===================== GỬI ĐIỂM VÀO GOOGLE FORM ===================== */
+function formConfig(){
+  if(!PREFILL_LINK) return null;
+  try{
+    const u = new URL(PREFILL_LINK);
+    const map = {};
+    for(const [k,v] of u.searchParams) if(k.startsWith("entry.")) map[v.trim().toUpperCase()] = k;
+    const m = u.pathname.match(/\/forms\/d\/e\/([^/]+)/);
+    const id = m ? m[1] : FORM_ID;
+    if(!map.NAME || !map.E1 || !map.E2 || !map.E3 || !map.E4) return null;
+    return {id, map};
+  }catch(e){ return null; }
+}
+function sendScores(name, sc){
+  const cfg = formConfig();
+  if(!cfg) return false;
+  const f = document.createElement("form");
+  f.method = "POST";
+  f.action = `https://docs.google.com/forms/d/e/${cfg.id}/formResponse`;
+  f.target = "gf-sink";
+  const vals = {NAME:name, E1:sc[0], E2:sc[1], E3:sc[2], E4:sc[3]};
+  for(const key in vals){
+    const inp = document.createElement("input");
+    inp.type = "hidden"; inp.name = cfg.map[key]; inp.value = String(vals[key]);
+    f.appendChild(inp);
+  }
+  document.body.appendChild(f);
+  f.submit();
+  f.remove();
+  return true;
+}
+
+/* ===================== LUỒNG NỘP BÀI ===================== */
+let submitted = false, warned = false, attempts = 0, firstScores = null, sentOK = false;
+const btn = $("submitBtn"), msg = $("msg");
+
+btn.addEventListener("click", ()=>{
+  const name = $("studentName").value.trim().replace(/\s+/g," ");
+  if(!name){
+    msg.className = "msg warn"; msg.textContent = "Em hãy nhập họ và tên trước khi nộp bài.";
+    $("studentName").focus(); return;
+  }
+  const items = getItems();
+  const pending = items.filter(x => !x.inputs[0].disabled);
+  const blanks = pending.filter(x => x.empty).length;
+  if(blanks && !warned){
+    warned = true;
+    msg.className = "msg warn";
+    msg.textContent = `Em còn ${blanks} câu chưa làm. Bấm nút thêm một lần nữa nếu vẫn muốn nộp.`;
+    return;
+  }
+  warned = false; msg.textContent = ""; msg.className = "msg";
+  attempts++;
+
+  if(!submitted){
+    firstScores = [0,1,2,3].map(e => items.filter(x => x.ex===e && x.ok).length);
+    sentOK = sendScores(name, firstScores);
+    submitted = true;
+    $("studentName").disabled = true;
+  }
+
+  items.forEach(x=>{
+    if(x.inputs[0].disabled) return;
+    const fb = x.li.querySelector(".fb");
+    x.li.classList.remove("ok","bad");
+    if(x.ok){
+      x.li.classList.add("ok");
+      fb.textContent = "✔ Đúng rồi!";
+      x.inputs.forEach(n => n.disabled = true);
+    }else{
+      x.li.classList.add("bad");
+      fb.textContent = (x.empty ? "✘ Em chưa làm câu này. " : "✘ Chưa đúng. ") + "Gợi ý: " + x.h;
+    }
+  });
+
+  renderResult(getItems());
+});
+
+function renderResult(items){
+  const wrong = items.filter(x => !x.ok);
+  const total = firstScores.reduce((a,b)=>a+b,0);
+  const sendLine = sentOK
+    ? "Điểm lần nộp đầu tiên đã được gửi cho giáo viên."
+    : "Chưa gửi được điểm vì giáo viên chưa kết nối Google Form. Em hãy chụp màn hình phần điểm này gửi cho giáo viên.";
+  let html = `<h3>Kết quả lần nộp đầu tiên: ${total}/40</h3>
+    <div class="scores">${firstScores.map((s,i)=>`<div>Exercise ${i+1}<b>${s}/10</b></div>`).join("")}</div>
+    <p class="msg">${sendLine}</p>`;
+  if(wrong.length){
+    const byEx = [0,1,2,3].map(e => wrong.filter(x=>x.ex===e));
+    html += `<p><b>Lần làm thứ ${attempts}: còn ${wrong.length} câu cần sửa.</b> Đọc gợi ý ở mỗi câu màu đỏ, sửa lại rồi bấm “Kiểm tra lại”. Em có thể xem lại <a href="#theory">phần tóm tắt kiến thức</a> ở đầu trang.</p>
+      <p class="todo">${byEx.map((arr,e)=>arr.length?`Exercise ${e+1}: ${arr.map(x=>`<a href="#e${e+1}-${x.i}">câu ${x.i+1}</a>`).join("")}<br>`:"").join("")}</p>`;
+    btn.textContent = "Kiểm tra lại";
+  }else{
+    html += `<p class="done">Chúc mừng! Em đã làm đúng toàn bộ 40 câu sau ${attempts} lần làm.</p>`;
+    btn.textContent = "Đã hoàn thành";
+    btn.disabled = true;
+  }
+  const r = $("result");
+  r.innerHTML = html; r.hidden = false;
+  r.scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block:"start"});
+}
+</script>
+</body>
+</html>
